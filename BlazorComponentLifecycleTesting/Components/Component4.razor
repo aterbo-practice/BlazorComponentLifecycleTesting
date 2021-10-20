@@ -11,22 +11,6 @@
     [Parameter]
     public bool IsVisible { get; set; }
 
-    //[Parameter]
-    //public bool IsVisible
-    //{
-    //    get => _isVisible;
-    //    set
-    //    {
-    //        if (_isVisible == IsVisible) return;
-    //        _isVisible = IsVisible;
-    //        BoundVisibilityChanged.InvokeAsync(IsVisible);
-    //    }
-    //}
-
-    //[Parameter]
-    //public EventCallback<bool> BoundVisibilityChanged { get; set; }
-
-
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         Logger.LogInformation("----------------------------");
