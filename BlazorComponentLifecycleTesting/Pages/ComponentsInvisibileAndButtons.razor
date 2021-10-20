@@ -1,0 +1,60 @@
+﻿@page "/InvisibleAndButtons"
+<h3>Components Invisible</h3>
+
+<p> All components are invisible in the Blazor page and toggled via buttons</p>
+<br />
+<br />
+<br />
+<button class="btn-outline-primary" @onclick="ToggleOne">Toggle Component One</button>
+<br />
+<br />
+<button class="btn-outline-secondary" @onclick="ToggleTwo">Toggle Component Two</button>
+<br />
+<br />
+<button class="btn-outline-info" @onclick="ToggleThree">Toggle Component Three</button>
+<br />
+<br />
+
+@if (isOneVisible)
+{
+    <BlazorComponentLifecycleTesting.Components.Component1 />
+}
+<br />
+<br />
+
+@if (isTwoVisible)
+{
+    <BlazorComponentLifecycleTesting.Components.Component2 />
+}
+<br />
+<br />
+
+@if (isThreeVisible)
+{
+    <BlazorComponentLifecycleTesting.Components.Component3 />
+}
+<br />
+<br />
+
+
+@code {
+
+    bool isOneVisible = false;
+    bool isTwoVisible = false;
+    bool isThreeVisible = false;
+
+    void ToggleOne()
+    {
+        isOneVisible ^= true;
+    }
+
+    void ToggleTwo()
+    {
+        isTwoVisible ^= true;
+    }
+
+    void ToggleThree()
+    {
+        isThreeVisible ^= true;
+    }
+}

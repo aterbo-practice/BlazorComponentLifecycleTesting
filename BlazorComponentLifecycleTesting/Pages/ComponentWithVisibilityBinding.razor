@@ -1,0 +1,66 @@
+﻿@page "/BoundVisibility"
+<h3>Components With Binding</h3>
+
+<p>
+    Component 1: rendered immediately upon page load. <br />
+    Component 2: initially visible on the Blazor page, and the button toggles visibility on the page.<br />
+    Component 3: initially invisible on the Blazor page, and the button toggles visibility on the page.<br />
+    Component 4: initially invisible on the Blazor page, but the visibility is within the component.
+    The button on this page controls visiblity via a bool bound as a parameter to the component.
+</p>
+<br />
+<br />
+<br />
+<button class="btn-outline-secondary" @onclick="ToggleTwo">Toggle Component Two</button>
+<br />
+<br />
+<button class="btn-outline-info" @onclick="ToggleThree">Toggle Component Three</button>
+<br />
+<br />
+<button class="btn-outline-danger" @onclick="ToggleFour">Toggle Component Four</button>
+<br />
+<br />
+
+
+<BlazorComponentLifecycleTesting.Components.Component1 />
+<br />
+<br />
+
+@if (isTwoVisible)
+{
+    <BlazorComponentLifecycleTesting.Components.Component2 />
+}
+<br />
+<br />
+
+@if (isThreeVisible)
+{
+    <BlazorComponentLifecycleTesting.Components.Component3 />
+}
+<br />
+<br />
+<BlazorComponentLifecycleTesting.Components.Component4 IsVisible="isFourVisible" />
+
+
+@code {
+
+    bool isOneVisible = false;
+    bool isTwoVisible = true;
+    bool isThreeVisible = false;
+    bool isFourVisible = false;
+
+    void ToggleTwo()
+    {
+        isTwoVisible ^= true;
+    }
+
+    void ToggleThree()
+    {
+        isThreeVisible ^= true;
+    }
+
+    void ToggleFour()
+    {
+        isFourVisible ^= true;
+    }
+}

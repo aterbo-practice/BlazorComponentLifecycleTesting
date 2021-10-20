@@ -1,0 +1,71 @@
+﻿@using Microsoft.Extensions.Logging
+@implements IDisposable
+@inject ILogger<Component2> Logger
+
+<h4>Component 2</h4>
+
+@code {
+
+    public Component2()
+    {
+        // "Logger" is not initialized yet
+    }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        Logger.LogInformation("----------------------------");
+        Logger.LogInformation("2 - SetParametersAsync-start");
+        Logger.LogInformation("----------------------------");
+        await base.SetParametersAsync(parameters);
+        Logger.LogInformation("2 - SetParametersAsync-end");
+    }
+
+    protected override void OnInitialized()
+    {
+        Logger.LogInformation("2 - OnInitialized-start");
+        base.OnInitialized();
+        Logger.LogInformation("2 - OnInitialized-end");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Logger.LogInformation("2 - OnInitializedAsync-start");
+        await base.OnInitializedAsync();
+        Logger.LogInformation("2 - OnInitializedAsync-end");
+    }
+
+    protected override void OnParametersSet()
+    {
+        Logger.LogInformation("2 - OnParametersSet-start");
+        base.OnParametersSet();
+        Logger.LogInformation("2 - OnParametersSet-end");
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Logger.LogInformation("2 - OnParametersSetAsync-start");
+        await base.OnParametersSetAsync();
+        Logger.LogInformation("2 - OnParametersSetAsync-end");
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Logger.LogInformation("2 - OnAfterRender({firstRender})-start", firstRender);
+        base.OnAfterRender(firstRender);
+        Logger.LogInformation("2 - OnAfterRender({firstRender})-end", firstRender);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        Logger.LogInformation("2 - OnAfterRenderAsync({firstRender})-start", firstRender);
+        await base.OnAfterRenderAsync(firstRender);
+        Logger.LogInformation("2 - OnAfterRenderAsync({firstRender})-end", firstRender);
+    }
+
+    public void Dispose()
+    {
+        Logger.LogInformation("----------------------------");
+        Logger.LogInformation("2 - Dispose");
+        Logger.LogInformation("----------------------------");
+    }
+}
