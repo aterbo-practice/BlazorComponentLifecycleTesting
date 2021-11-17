@@ -1,0 +1,33 @@
+﻿@page "/ComponentWithDelay"
+<h3>Component With Delay - Invisible</h3>
+
+<p>
+    The component on this page is invisible in the Blazor page and toggled via buttons.
+    It has Thread.Sleep(5000) and Task.Delay(5000) in OnInitialized in OnInitializedAsync for testing.
+    Watch the output in the debug window.
+</p>
+<br />
+<br />
+<br />
+<button class="btn-outline-primary" @onclick="ToggleDelay">Toggle Component With Delay</button>
+<br />
+<br />
+
+@if (isDelayVisible)
+{
+    <BlazorComponentLifecycleTesting.Components.DelayedRenderComponent />
+}
+<br />
+<br />
+<br />
+
+
+@code {
+
+    bool isDelayVisible = false;
+
+    void ToggleDelay()
+    {
+        isDelayVisible ^= true;
+    }
+}

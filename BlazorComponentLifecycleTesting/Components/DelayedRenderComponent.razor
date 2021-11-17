@@ -1,0 +1,90 @@
+﻿@using Microsoft.Extensions.Logging
+@implements IDisposable
+@inject ILogger<DelayedRenderComponent> Logger
+@using System.Threading 
+
+<h4>Delayed Render Component</h4>
+<p>This component has both sleep and delay within OnInitialized methods</p>
+@code {
+
+    public DelayedRenderComponent()
+    {
+        // "Logger" is not initialized yet
+    }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        Logger.LogInformation("----------------------------");
+        Logger.LogInformation("1 - SetParametersAsync-start");
+        Logger.LogInformation("----------------------------");
+        await base.SetParametersAsync(parameters);
+        Logger.LogInformation("1 - SetParametersAsync-end");
+    }
+
+    protected override void OnInitialized()
+    {
+        Logger.LogInformation("1 - OnInitialized-start");
+
+        Logger.LogInformation("      ###### OnInitialized Thread.Sleep Start");
+        Thread.Sleep(5000);
+        Logger.LogInformation("      ###### OnInitialized Thread.Sleep End");
+
+        Logger.LogInformation("      ###### OnInitialized Task.Delay Start");
+        Task.Delay(5000);
+        Logger.LogInformation("      ###### OnInitialized Task.Delay End");
+
+        base.OnInitialized();
+        Logger.LogInformation("1 - OnInitialized-end");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Logger.LogInformation("1 - OnInitializedAsync-start");
+
+        Logger.LogInformation("      ###### OnInitializedAsync Thread.Sleep Start");
+        Thread.Sleep(5000);
+        Logger.LogInformation("      ###### OnInitializedAsync Thread.Sleep End");
+
+        Logger.LogInformation("      ###### OnInitializedAsync Task.Delay Start");
+        await Task.Delay(5000);
+        Logger.LogInformation("      ###### OnInitializedAsync Task.Delay End");
+
+        await base.OnInitializedAsync();
+        Logger.LogInformation("1 - OnInitializedAsync-end");
+    }
+
+    protected override void OnParametersSet()
+    {
+        Logger.LogInformation("1 - OnParametersSet-start");
+        base.OnParametersSet();
+        Logger.LogInformation("1 - OnParametersSet-end");
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Logger.LogInformation("1 - OnParametersSetAsync-start");
+        await base.OnParametersSetAsync();
+        Logger.LogInformation("1 - OnParametersSetAsync-end");
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Logger.LogInformation("1 - OnAfterRender({firstRender})-start", firstRender);
+        base.OnAfterRender(firstRender);
+        Logger.LogInformation("1 - OnAfterRender({firstRender})-end", firstRender);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        Logger.LogInformation("1 - OnAfterRenderAsync({firstRender})-start", firstRender);
+        await base.OnAfterRenderAsync(firstRender);
+        Logger.LogInformation("1 - OnAfterRenderAsync({firstRender})-end", firstRender);
+    }
+
+    public void Dispose()
+    {
+        Logger.LogInformation("----------------------------");
+        Logger.LogInformation("1 - Dispose");
+        Logger.LogInformation("----------------------------");
+    }
+}
